@@ -1,0 +1,8 @@
+E:/ICC/B_2019/version_2/testfixture.v {1 {vlog -work work -stats=none E:/ICC/B_2019/version_2/testfixture.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling module testfixture
+
+Top level modules:
+	testfixture
+
+} {} {}}

@@ -1,0 +1,149 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_pro/21.1
+vCONV
+Z0 !s110 1647075419
+!i10b 1
+!s100 X7b>Yfe;hDaM3CQzbAdDN1
+IOlPdZ0>i@LG^6i<:_IzBF0
+Z1 dE:/ICC/B_2019/version_1
+w1647075415
+8E:/ICC/B_2019/version_1/CONV.v
+FE:/ICC/B_2019/version_1/CONV.v
+!i122 457
+L0 6 347
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 OV;L;2021.1;73
+r1
+!s85 0
+31
+Z4 !s108 1647075419.000000
+!s107 ./DW02_mac_function.inc|./DW02_mac.v|E:/ICC/B_2019/version_1/CONV.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/version_1/CONV.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+n@c@o@n@v
+vDW01_add
+Z7 !s110 1647071806
+!i10b 1
+!s100 Nd:ReGkk]eCzX;>L0e[9S1
+IIzi@=El:cMWZlX`lh:G=k0
+Z8 dE:/ICC/B_2019
+w1646890544
+8E:/ICC/B_2019/DW01_add.v
+FE:/ICC/B_2019/DW01_add.v
+!i122 456
+L0 36 49
+R2
+R3
+r1
+!s85 0
+31
+Z9 !s108 1647071806.000000
+!s107 E:/ICC/B_2019/DW01_add.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/DW01_add.v|
+!i113 1
+R5
+R6
+n@d@w01_add
+vDW02_mac
+R0
+!i10b 1
+!s100 <0O3_fI?nTTMJl:1dBoEP3
+IKi3Vi9o4M6zD?iJ19a7LJ3
+R1
+w1646885663
+8E:/ICC/B_2019/version_1/DW02_mac.v
+FE:/ICC/B_2019/version_1/DW02_mac.v
+F./DW02_mac_function.inc
+!i122 458
+L0 43 178
+R2
+R3
+r1
+!s85 0
+31
+R4
+!s107 ./DW02_mac_function.inc|E:/ICC/B_2019/version_1/DW02_mac.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/version_1/DW02_mac.v|
+!i113 1
+R5
+R6
+n@d@w02_mac
+vDW02_mult
+R7
+!i10b 1
+!s100 WTW;dEf[BZNB;9^`C_cho1
+I^a7jbI@:<9MI86dz3O5?a1
+R8
+w1646832225
+8E:/ICC/B_2019/DW02_mult.v
+FE:/ICC/B_2019/DW02_mult.v
+!i122 454
+L0 37 63
+R2
+R3
+r1
+!s85 0
+31
+R9
+!s107 E:/ICC/B_2019/DW02_mult.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/DW02_mult.v|
+!i113 1
+R5
+R6
+n@d@w02_mult
+vOUT
+!s110 1646983138
+!i10b 1
+!s100 Kbf>jlW;kEo_fNSil406Q0
+I8aWGzQ<5219j;5hzV?9XR2
+R8
+w1646983130
+8E:/ICC/B_2019/CONV.v
+FE:/ICC/B_2019/CONV.v
+!i122 185
+L0 8 241
+R2
+R3
+r1
+!s85 0
+31
+!s108 1646983138.000000
+!s107 ./DW01_add.v|./DW02_mac_function.inc|./DW02_mac.v|./DW02_mult.v|E:/ICC/B_2019/CONV.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/CONV.v|
+!i113 1
+R5
+R6
+n@o@u@t
+vtestfixture
+R0
+!i10b 1
+!s100 IdRj6JNP;hMgz9b_FjLgX2
+IPg296f@VVRVQ^oBf]@dJm2
+R1
+w1646819478
+8E:/ICC/B_2019/version_1/testfixture.v
+FE:/ICC/B_2019/version_1/testfixture.v
+!i122 459
+L0 13 261
+R2
+R3
+r1
+!s85 0
+31
+R4
+!s107 E:/ICC/B_2019/version_1/testfixture.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/version_1/testfixture.v|
+!i113 1
+R5
+R6

@@ -1,0 +1,56 @@
+m255
+K4
+z2
+!s11f vlog 2021.1 2021.02, Feb  3 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dE:/ICC/B_2019/version_1
+vCONV
+Z0 !s110 1647229299
+!i10b 1
+!s100 iNMQN6If<GQ?aoNf=;KOd2
+I:biUG=3WSoPEL?9Xch>US1
+Z1 dE:/ICC/B_2019/version_2
+w1647229296
+8E:/ICC/B_2019/version_2/CONV.v
+FE:/ICC/B_2019/version_2/CONV.v
+!i122 50
+L0 9 392
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 OV;L;2021.1;73
+r1
+!s85 0
+31
+Z4 !s108 1647229299.000000
+!s107 E:/ICC/B_2019/version_2/CONV.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/version_2/CONV.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+n@c@o@n@v
+vtestfixture
+R0
+!i10b 1
+!s100 IdRj6JNP;hMgz9b_FjLgX2
+INP9ULlBSF]UWjLNj]5ZOj2
+R1
+w1646819478
+8E:/ICC/B_2019/version_2/testfixture.v
+FE:/ICC/B_2019/version_2/testfixture.v
+!i122 51
+L0 13 261
+R2
+R3
+r1
+!s85 0
+31
+R4
+!s107 E:/ICC/B_2019/version_2/testfixture.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/ICC/B_2019/version_2/testfixture.v|
+!i113 1
+R5
+R6

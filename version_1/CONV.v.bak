@@ -1,0 +1,191 @@
+
+`timescale 1ns/10ps
+
+`include "./DW02_mult.v"
+
+module  CONV(
+	input		clk,
+	input		reset,
+	output reg busy,	
+	input		ready,	
+			
+	output [11:0] iaddr,
+	input [19:0]idata,	
+	
+	output reg cwr,
+	output [11:0] caddr_wr,
+	output [19:0] cdata_wr,
+	
+	output	 	crd,
+	output [11:0] caddr_rd,
+	input [19:0] cdata_rd,
+	
+	output reg [2:0] csel
+	);
+
+	localparam IDLE = 3'd0;
+	localparam RECV = 3'd1;
+	localparam CONV = 3'd2;
+	localparam L0   = 3'd3;
+
+	// localparam k0_0 = 20'h0A89E;
+	// localparam k0_1 = 20'h092D5;
+	// localparam k0_2 = 20'h06D43;
+	// localparam k0_3 = 20'h01004;
+	// localparam k0_4 = 20'hF8F71;
+	// localparam k0_5 = 20'hF6E54;
+	// localparam k0_6 = 20'hFA6D7;
+	// localparam k0_7 = 20'hFC834;
+	// localparam k0_8 = 20'hFAC19;
+
+	// localparam k1_0 = 20'hFDB55;
+	// localparam k1_1 = 20'h02992;
+	// localparam k1_2 = 20'hFC994;
+	// localparam k1_3 = 20'h050FD;
+	// localparam k1_4 = 20'h02F20;
+	// localparam k1_5 = 20'h0202D;
+	// localparam k1_6 = 20'h03BD7;
+	// localparam k1_7 = 20'hFD369;
+	// localparam k1_8 = 20'h05E68;
+
+	reg [2:0] ps, ns;
+	reg [1:0] index_kx, index_ky;
+	reg [19:0] kernel_0[0:2][0:2], kernel_1[0:2][0:2];
+	reg signed [39:0] data_l0_reg;
+	reg [12:0] anchor;
+
+	wire [19:0] kernel;
+
+	always @(posedge clk or posedge reset) begin
+		if(reset) 
+		begin
+			ps <= IDLE;
+		end
+		else 
+		begin
+			ps <= ns;
+		end
+	end
+
+	always @(*) begin
+		case(ps)
+		IDLE: ns = RECV;
+		RECV: ns = (index_ky == 2'd2 & index_kx == 2'd2) ? CONV : RECV;
+		CONV: ns = L0;
+		endcase
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			kernel_0[0][0] <= 20'h0A89E;
+			kernel_0[0][1] <= 20'h092D5;
+			kernel_0[0][2] <= 20'h06D43;
+			kernel_0[1][0] <= 20'h01004;
+			kernel_0[1][1] <= 20'hF8F71;
+			kernel_0[1][2] <= 20'hF6E54;
+			kernel_0[2][0] <= 20'hFA6D7;
+			kernel_0[2][1] <= 20'hFC834;
+			kernel_0[2][2] <= 20'hFAC19;
+		end
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			index_kx <= 2'd0;
+		end
+		else if(ps == RECV)
+		begin
+			index_kx <= (index_kx == 2'd2) ? 2'd0 : index_kx + 1'd1;
+		end
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			index_ky <= 2'd0;
+		end
+		else if(ps == RECV)
+		begin
+			index_ky <= (index_kx == 2'd2) ? index_ky + 1'd1 : index_ky;
+		end
+	end
+
+	assign iaddr = 12'd64*(index_ky - 1'd1) + index_kx - 1'd1;
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			anchor <= 12'd0;
+		end
+	end
+
+	assign kernel = (anchor        < 20'd64   && index_ky == 2'd0) ? 20'd0 :
+					(anchor        > 20'd4032 && index_ky == 2'd2) ? 20'd0 :
+					((anchor % 64) == 20'd0   && index_kx == 2'd0) ? 20'd0 :
+					((anchor % 64) == 20'd63  && index_kx == 2'd2) ? 20'd0 :
+					kernel_0[index_ky][index_kx];
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			data_l0_reg <= 40'd0;
+		end
+		else if(ps == RECV)
+		begin
+			data_l0_reg <= data_l0_reg + data_l0;
+		end
+		else if(ps == CONV)
+		begin
+			data_l0_reg <= data_l0_reg + {10'd0, 20'h01310, 10'd0};
+		end
+	end
+
+	wire [39:0] data_l0;
+	DW02_mult #(.A_width (20), .B_width (20)) u_DW02_mult(.A(kernel), .B(idata), .TC(1'd1), .PRODUCT(data_l0));
+	
+
+	assign cdata_wr = (data_l0 > 0) ? data_l0[29:10] : 20'd0;
+
+	assign caddr_wr = anchor;
+
+	// output
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			busy <= 1'd0;
+		end
+		else if(ready)
+		begin
+			busy <= 1'd1;
+		end
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			cwr <= 1'd0;
+		end
+		else if(ps == L0)
+		begin
+			cwr <= 1'd1;
+		end
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset)
+		begin
+			csel <= 3'b000;
+		end
+		else if(ps == L0)
+		begin
+			csel <= 3'b001;
+		end
+	end
+
+endmodule
+
+
+
+
